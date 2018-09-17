@@ -22,10 +22,11 @@ export default class ChromeBoisDomain extends Component {
     )
 
     handleResize = (e) => {
-        if (e.key === "+") {
+        console.log(e.key)
+        if (e.key === "a") {
             resize('+')
         }
-        else if (e.key === "-") {
+        else if (e.key === "s") {
             resize('-')
         }
     }
