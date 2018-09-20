@@ -8,13 +8,38 @@ body, html, #root, div {
   user-select: none;
 }
 
-div {
-  display: flex;
+div { display: block;
+  align-items: center; justify-content: center; }
+
+canvas {
+  border: 15px solid grey;
+}
+
+img{
+  height: 35px;
   align-items: center;
   justify-content: center;
 }
 
-canvas {
-  border: 1px solid grey;
-  cursor: none; 
+.container
+{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
 }
