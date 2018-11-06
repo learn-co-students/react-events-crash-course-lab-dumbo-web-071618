@@ -78,19 +78,33 @@ export default class ChromeBoisDomain extends Component {
   }
 
 
+  componentDidMount() {
+    const canvas = this.refs.canvas
+    const ctx = canvas.getContext("2d")
+    const img = this.refs.image
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0)
+      ctx.font = "40px Courier"
+      ctx.fillText(this.props.text, 210, 75)
+    }
+  }
+
+
   render() {
     return (
     <div>
     <div>
       <canvas
+        ref="canvas"
         onMouseMove={this.handleMouseMove}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onKeyDown={this.handleKeyDown}
         width='955'
         height='600'
-        tabIndex="0">
-      </canvas>
+        tabIndex="0"/>
+      <img ref="image" src={"dwqdwq"} className="hidden" />
+
 
       </div>
       <text> <br></br> </text>
@@ -167,6 +181,7 @@ export default class ChromeBoisDomain extends Component {
         <img class = "animation" id = "vertical" src="vertical.svg" alt=""onClick={this.handleAnimateSelect}/>
 
         <img className = "App-logo" id = "App-logo" src="clockwise.svg" alt=""onClick={this.handleAnimateSelect}/>
+        <text> <br></br> </text>
 
 
       </div>
