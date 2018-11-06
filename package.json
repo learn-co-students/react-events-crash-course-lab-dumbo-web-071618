@@ -11,10 +11,13 @@
     ]
   },
   "dependencies": {
+    "ajv": "^6.5.3",
     "mocha-multi": "^1.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-redux": "^5.1.0",
     "react-scripts": "1.1.4",
+    "two.js": "^0.7.0-alpha.1",
     "webpack": "^3.11.0"
   },
   "scripts": {

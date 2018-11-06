@@ -1,9 +1,9 @@
 // nothing needs to change here. These helpers abstracted here just to keep
 // lesson focused on event handling and not hacky HTML5 canvas nonsense
+import './canvasHelpers.css';
 
 let colors = []
 let def = null
-let cycling = false
 let idx = 0
 let [sizeX, sizeY] = [95, 121]
 
@@ -14,7 +14,7 @@ export function init() {
   def.src = "1.png"
 }
 
-export function drawChromeBoiAtCoords(x, y, imgPNG) {
+export function drawChromeBoiAtCoords(x, y, imgPNG, animation) {
 
   const canvas = document.querySelector("canvas") // sloppy but we haven't introduced lifecycle methods and canvas wouldn't be rendered
   const ctx = canvas.getContext("2d")
@@ -27,7 +27,8 @@ export function drawChromeBoiAtCoords(x, y, imgPNG) {
     idx = (idx + 1) % 3
   } else {
     def.src = imgPNG
-
+    def.className = "App-logo"
+    console.log(def);
     img = def
   }
 

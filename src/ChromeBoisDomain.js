@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { drawChromeBoiAtCoords, toggleCycling, resize } from './canvasHelpers.js'
+import { drawChromeBoiAtCoords, resize } from './canvasHelpers.js'
+import './canvasHelpers.css';
+
 
 
 export default class ChromeBoisDomain extends Component {
@@ -8,7 +10,10 @@ export default class ChromeBoisDomain extends Component {
     this.state = {
       imgPNG: "http://localhost:3000/1.png",
       mouseDown: false,
-      percentage: 1
+      percentage: 1,
+      emoji: {
+        animation: ""
+      }
     }
   }
 
@@ -22,18 +27,26 @@ export default class ChromeBoisDomain extends Component {
 
 
   handleKeyDown = (event) => {
-    if (event.key === "a"){
+    if (event.key === "2"){
       resize("+")
     }
-    if (event.key === "s"){
+    if (event.key === "1"){
       resize("-")
     }
   }
 
   handleEmojiSelect = (event) => {
     let id = event.target.id
-    this.setState({imgPNG: `http://localhost:3000/${id}.png`}, () => {
 
+    this.setState({imgPNG: `http://localhost:3000/${id}.png`})
+
+    this.setState({emoji: {animation: ""}})
+
+  }
+
+  handleAnimateSelect = (event) => {
+    console.log(event.target.id);
+    this.setState({emoji: {animation: event.target.id}},() => {
     })
   }
 
@@ -42,14 +55,14 @@ export default class ChromeBoisDomain extends Component {
   }
 
   handleMouseDown = (event) => {
-    this.percentageReset
+    this.percentageReset()
     this.setState(prevState => {
       return {mouseDown: !prevState.mouseDown}
     })
   }
 
   handleMouseUp = (event) => {
-    this.percentageReset
+    this.percentageReset()
     this.setState(prevState => {
       return {mouseDown: !prevState.mouseDown}
     })
@@ -57,10 +70,9 @@ export default class ChromeBoisDomain extends Component {
 
   handleMouseMove = (event) => {
     this.percentageIncrease()
-    console.log(this.state.percentage);
     if (this.state.mouseDown){
       if(this.state.percentage % 2 === 0){
-        drawChromeBoiAtCoords(event.clientX, event.clientY, this.state.imgPNG)
+        drawChromeBoiAtCoords(event.clientX, event.clientY, this.state.imgPNG, this.state.emoji.animation)
       }
     }
   }
@@ -115,7 +127,7 @@ export default class ChromeBoisDomain extends Component {
       <text> <br></br> </text>
       <text> <br></br> </text>
       <text> <br></br> </text>
-
+      <text> <br></br> </text>
 
       <div class="container" >
         <img id = "1" src="1.png" alt=""onClick={this.handleEmojiSelect}/>
@@ -150,9 +162,11 @@ export default class ChromeBoisDomain extends Component {
         <text> <br></br> </text>
         <text> <br></br> </text>
 
-        <img id = "horizontal" src="horizontal.svg" alt=""onClick={this.handleEmojiSelect}/>
-        <img id = "vertical" src="vertical.svg" alt=""onClick={this.handleEmojiSelect}/>
-        <img id = "clockwise" src="clockwise.svg" alt=""onClick={this.handleEmojiSelect}/>
+        <img class = "animation" id = "horizontal" src="horizontal.svg" alt=""onClick={this.handleAnimateSelect}/>
+
+        <img class = "animation" id = "vertical" src="vertical.svg" alt=""onClick={this.handleAnimateSelect}/>
+
+        <img className = "App-logo" id = "App-logo" src="clockwise.svg" alt=""onClick={this.handleAnimateSelect}/>
 
 
       </div>

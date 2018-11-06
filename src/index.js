@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './canvasHelpers.css'
 import { init } from './canvasHelpers'
 import ChromeBoisDomain from './ChromeBoisDomain.js'
 
