@@ -9,11 +9,15 @@ export default class ChromeBoisDomain extends Component {
     super()
     this.state = {
       imgPNG: "http://localhost:3000/1.png",
+      text: "Hey now",
       mouseDown: false,
       percentage: 1,
       emoji: {
         animation: ""
-      }
+      },
+      ctx: "",
+      x: 10,
+      y: 10
     }
   }
 
@@ -77,16 +81,22 @@ export default class ChromeBoisDomain extends Component {
     }
   }
 
+  animate = (event) => {
+    console.log(this.state.ctx);
+    // requestAnimationFrame(this.animate)
+    this.state.ctx.fillStyle = 'purple';
+    this.setState({x: this.state.x + 1}, () => {
+      this.state.ctx.fillRect(this.state.x, 10, 100, 100)
+    })
+  }
 
   componentDidMount() {
     const canvas = this.refs.canvas
-    const ctx = canvas.getContext("2d")
-    const img = this.refs.image
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0)
-      ctx.font = "40px Courier"
-      ctx.fillText(this.props.text, 210, 75)
-    }
+    const plane = canvas.getContext("2d")
+    this.setState({ctx: plane}, () => {
+      this.animate()
+    })
+
   }
 
 
@@ -103,7 +113,7 @@ export default class ChromeBoisDomain extends Component {
         width='955'
         height='600'
         tabIndex="0"/>
-      <img ref="image" src={"dwqdwq"} className="hidden" />
+      <img ref="image" src={"dwqdwq"}  className="hidden" />
 
 
       </div>
