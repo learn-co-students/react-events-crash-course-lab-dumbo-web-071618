@@ -16,8 +16,12 @@ export default class ChromeBoisDomain extends Component {
         animation: ""
       },
       ctx: "",
-      x: 10,
-      y: 10
+      x: 0,
+      y: 0,
+      dx: 4,
+      dy: 1,
+      c_width: 400,
+      c_height: 600,
     }
   }
 
@@ -82,12 +86,37 @@ export default class ChromeBoisDomain extends Component {
   }
 
   animate = (event) => {
-    console.log(this.state.ctx);
-    // requestAnimationFrame(this.animate)
+    requestAnimationFrame(this.animate)
     this.state.ctx.fillStyle = 'purple';
-    this.setState({x: this.state.x + 1}, () => {
-      this.state.ctx.fillRect(this.state.x, 10, 100, 100)
+    this.state.ctx.clearRect(0,0, 955,600)
+    console.log("X's coord: ", this.state.x);
+    // if (this.state.x + 100 > this.state.c_width || this.state.x - 1 < 0){
+    //   this.setState({dx: -(this.state.dx), x: this.state.x + this.state.dx}, () => {
+    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
+    //   })
+    // }
+    // if (this.state.x  < this.state.c_width){
+    //   this.setState({dx: this.state.dx, x: this.state.x + this.state.dx}, () => {
+    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
+    //   })
+    // }
+    // if (this.state.x > this.state.c_width) {
+    //   console.log("I am called");
+    //   this.setState({dx: -(this.state.dx), x: this.state.x + this.state.dx}, () => {
+    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
+    //   })
+    // }
+    if (this.state.x > this.state.c_width ){
+      this.setState({dx: -4, x: this.state.x + this.state.dx}, () => {
+        console.log("this is dx", this.state.dx);
+        this.state.ctx.fillRect(this.state.x + this.state.dx, 10, 100, 100)
+      })
+    }
+
+    this.setState({x: this.state.x + this.state.dx}, () => {
+      this.state.ctx.fillRect(this.state.x + this.state.dx, 10, 100, 100)
     })
+
   }
 
   componentDidMount() {
@@ -113,7 +142,6 @@ export default class ChromeBoisDomain extends Component {
         width='955'
         height='600'
         tabIndex="0"/>
-      <img ref="image" src={"dwqdwq"}  className="hidden" />
 
 
       </div>
@@ -152,6 +180,8 @@ export default class ChromeBoisDomain extends Component {
       <text> <br></br> </text>
       <text> <br></br> </text>
       <text> <br></br> </text>
+      <text> <br></br> </text>
+
 
       <div class="container" >
         <img id = "1" src="1.png" alt=""onClick={this.handleEmojiSelect}/>
