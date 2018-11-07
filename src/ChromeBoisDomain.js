@@ -19,9 +19,9 @@ export default class ChromeBoisDomain extends Component {
       x: 0,
       y: 0,
       dx: 4,
-      dy: 1,
-      c_width: 400,
-      c_height: 600,
+      dy: 4,
+      c_width: 860,
+      c_height: 500,
     }
   }
 
@@ -85,27 +85,11 @@ export default class ChromeBoisDomain extends Component {
     }
   }
 
-  animate = (event) => {
-    requestAnimationFrame(this.animate)
+  animateHorizontal = (event) => {
+    requestAnimationFrame(this.animateHorizontal)
     this.state.ctx.fillStyle = 'purple';
     this.state.ctx.clearRect(0,0, 955,600)
-    console.log("X's coord: ", this.state.x);
-    // if (this.state.x + 100 > this.state.c_width || this.state.x - 1 < 0){
-    //   this.setState({dx: -(this.state.dx), x: this.state.x + this.state.dx}, () => {
-    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
-    //   })
-    // }
-    // if (this.state.x  < this.state.c_width){
-    //   this.setState({dx: this.state.dx, x: this.state.x + this.state.dx}, () => {
-    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
-    //   })
-    // }
-    // if (this.state.x > this.state.c_width) {
-    //   console.log("I am called");
-    //   this.setState({dx: -(this.state.dx), x: this.state.x + this.state.dx}, () => {
-    //     this.state.ctx.fillRect(this.state.x, 10, 100, 100)
-    //   })
-    // }
+
     if (this.state.x > this.state.c_width ){
       this.setState({dx: -4, x: this.state.x + this.state.dx}, () => {
         console.log("this is dx", this.state.dx);
@@ -126,11 +110,34 @@ export default class ChromeBoisDomain extends Component {
 
   }
 
+  animateVertical = (event) => {
+    requestAnimationFrame(this.animateVertical)
+    this.state.ctx.fillStyle = 'purple';
+    this.state.ctx.clearRect(0,0, 955,600)
+
+    if (this.state.y > this.state.c_height ){
+      this.setState({dy: -4, y: this.state.y + this.state.dy}, () => {
+        this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
+      })
+    }
+
+    if (this.state.y < 0 ){
+      this.setState({dy: 4, y: this.state.y + this.state.dy}, () => {
+        this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
+      })
+    }
+
+    this.setState({y: this.state.y + this.state.dy}, () => {
+      this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
+    })
+
+  }
+
   componentDidMount() {
     const canvas = this.refs.canvas
     const plane = canvas.getContext("2d")
     this.setState({ctx: plane}, () => {
-      this.animate()
+      this.animateVertical()
     })
 
   }
