@@ -113,6 +113,13 @@ export default class ChromeBoisDomain extends Component {
       })
     }
 
+    if (this.state.x < 0 ){
+      this.setState({dx: 4, x: this.state.x + this.state.dx}, () => {
+        console.log("this is dx", this.state.dx);
+        this.state.ctx.fillRect(this.state.x + this.state.dx, 10, 100, 100)
+      })
+    }
+
     this.setState({x: this.state.x + this.state.dx}, () => {
       this.state.ctx.fillRect(this.state.x + this.state.dx, 10, 100, 100)
     })
