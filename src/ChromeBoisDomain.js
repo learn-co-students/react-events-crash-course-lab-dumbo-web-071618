@@ -114,21 +114,21 @@ export default class ChromeBoisDomain extends Component {
     requestAnimationFrame(this.animateVertical)
     this.state.ctx.fillStyle = 'purple';
     this.state.ctx.clearRect(0,0, 955,600)
+    const def = document.createElement("img")
+    def.src = "1.png"
+    this.state.ctx.drawImage(def, 200,200)
 
     if (this.state.y > this.state.c_height ){
-      this.setState({dy: -4, y: this.state.y + this.state.dy}, () => {
-        this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
-      })
+      this.setState({dy: -4, y: this.state.y + this.state.dy})
     }
 
     if (this.state.y < 0 ){
-      this.setState({dy: 4, y: this.state.y + this.state.dy}, () => {
-        this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
-      })
+      this.setState({dy: 4, y: this.state.y + this.state.dy})
     }
 
     this.setState({y: this.state.y + this.state.dy}, () => {
       this.state.ctx.fillRect(10, this.state.y + this.state.dy, 100, 100)
+      this.state.ctx.drawImage(def, 10, this.state.y + this.state.dy)
     })
 
   }
